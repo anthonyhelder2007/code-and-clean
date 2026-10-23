@@ -17,6 +17,7 @@ header {
     padding: 15px 40px;
     background: #0f172a;
     color: white;
+    flex-wrap: wrap;
 }
 
 .header1 {
@@ -69,11 +70,6 @@ nav ul li a:hover {
     font-weight: bold;
     cursor: pointer;
     color: #0f172a;
-    transition: 0.3s;
-}
-
-.btn1:hover {
-    background: #0ea5e9;
 }
 
 .login-icon {
@@ -82,18 +78,25 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
-.login-icon:hover {
-    color: #38bdf8;
-}
-
-/* HERO */
+/* HERO CENTRALIZADO */
 .container1 {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 60px 40px;
-    gap: 30px;
+    justify-content: center;
+    padding: 80px 40px;
+    gap: 80px;
     background: white;
+    min-height: 70vh;
+}
+
+.container2 {
+    flex: 1;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .container2 h2 {
@@ -101,17 +104,20 @@ nav ul li a:hover {
     line-height: 45px;
     margin-bottom: 15px;
     color: #0f172a;
+    text-align: center;
 }
 
 .container2 p {
     color: #475569;
-    margin-bottom: 20px;
-    line-height: 22px;
+    margin-bottom: 25px;
+    line-height: 24px;
+    text-align: center;
+    max-width: 450px;
 }
 
 .container2 button {
-    padding: 12px 20px;
-    margin-right: 10px;
+    padding: 12px 22px;
+    margin: 5px 8px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -129,11 +135,20 @@ nav ul li a:hover {
     color: #0f172a;
 }
 
+.c-img1 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 550px;
+}
+
 .c-img1 img {
-    width: 450px;
+    width: 500px;
     max-width: 100%;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: block;
 }
 
 /* SERVIÇOS */
@@ -141,6 +156,14 @@ nav ul li a:hover {
     text-align: center;
     padding: 60px 40px;
     background: #f1f5f9;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.container3 h3, .container3 > p {
+    width: 100%;
 }
 
 .container3 h3 {
@@ -152,17 +175,6 @@ nav ul li a:hover {
 .container3 > p {
     color: #64748b;
     margin-bottom: 40px;
-}
-
-.container3 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-}
-
-.container3 h3, .container3 > p {
-    width: 100%;
 }
 
 .cards {
@@ -199,11 +211,52 @@ nav ul li a:hover {
     line-height: 20px;
 }
 
-/* FOOTER */
 .footer {
     background: #0f172a;
     color: #94a3b8;
     text-align: center;
     padding: 20px;
     font-size: 14px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    header {
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    nav {
+        order: 3;
+        width: 100%;
+    }
+    nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #1e293b;
+        margin-top: 10px;
+    }
+    .container1 {
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 40px;
+        min-height: auto;
+    }
+    .container2 h2 {
+        font-size: 32px;
+        line-height: 35px;
+    }
+    .container3 {
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container2 h2 {
+        font-size: 28px;
+    }
+    .cards {
+        width: 100%;
+    }
 }
