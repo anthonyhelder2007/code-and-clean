@@ -62,14 +62,20 @@ nav ul li a:hover {
     gap: 15px;
 }
 
+.header-actions a {
+    text-decoration: none;
+}
+
 .btn1 {
     background: #38bdf8;
     border: none;
     padding: 10px 18px;
-    border-radius: 6px;
+    border-radius: 20px;
     font-weight: bold;
     cursor: pointer;
     color: #0f172a;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .login-icon {
@@ -115,21 +121,23 @@ nav ul li a:hover {
     max-width: 450px;
 }
 
-.container2 button {
+/* BOTÕES HERO - MESMA COR QUE TAVA E SEPARADOS */
+.btn-escuro, .btn-claro {
     padding: 12px 22px;
-    margin: 5px 8px;
-    border: none;
     border-radius: 6px;
-    cursor: pointer;
     font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    margin: 8px;
 }
 
-.container2 button:nth-child(3) {
+.btn-escuro {
     background: #0f172a;
     color: white;
 }
 
-.container2 button:nth-child(4) {
+.btn-claro {
     background: transparent;
     border: 2px solid #0f172a;
     color: #0f172a;
@@ -219,7 +227,6 @@ nav ul li a:hover {
     font-size: 14px;
 }
 
-/* RESPONSIVO */
 @media (max-width: 900px) {
     header {
         padding: 15px 20px;

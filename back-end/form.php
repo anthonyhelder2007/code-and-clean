@@ -1,5 +1,5 @@
 <?php
-require_once "back-end/conexao.php";
+require_once "conexao.php";
 session_start();
 
 $mensagem = "";
@@ -29,7 +29,7 @@ function validarLogin($e, $s){
 
     // CORREÇÃO AQUI - era password_verify
     if ($usuario && $s === $usuario['senha']) {
-        header("Location: back-end/adm.php");
+        header("Location: adm.php");
         exit;
     } else {
         return "E-mail ou senha incorretos";
@@ -42,14 +42,14 @@ function validarLogin($e, $s){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área Administrativa - Anthony Code & Clean</title>
-    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="../css/form.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
     <main class="container-login">
         <div class="card-login">
             <div class="logo-topo">
-                <img src="img/logo.jpeg" alt="Anthony Code & Clean">
+                <img src="../img/logo.jpeg" alt="Anthony Code & Clean">
                 <div class="logo-text">
                     <strong>ANTHONY</strong>
                     <span>CODE & CLEAN</span>
@@ -95,7 +95,7 @@ function validarLogin($e, $s){
                 Ambiente seguro • Conexão protegida • SSL
             </div>
         </div>
-        <footer>© 2024 ANTHONY CODE & CLEAN — Todos os direitos reservados.</footer>
+        <footer>© 2026 ANTHONY CODE & CLEAN — Todos os direitos reservados.</footer>
     </main>
 
 <script>
