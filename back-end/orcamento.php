@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 function validarForm($type, $name, $number, $e, $desc){
     $tipos_validos = ["criaSite", "limpaPc", "formataPc"];
     $number_limpo = preg_replace('/[^0-9]/', '', $number);
+    $erroSalvar = "";
     
     if (empty($type) ||empty($name) || empty($number) || empty($e) || empty($desc)) {
         return '<p class="erro">Preencha todos os campos</p>';
@@ -29,20 +30,38 @@ function validarForm($type, $name, $number, $e, $desc){
     
     if (strlen($number_limpo) != 11) {
         return '<p class="erro">Numero inválido</p>';
-    }
+     }
     if (!filter_var($e, FILTER_VALIDATE_EMAIL)) {
         return '<p class="erro">E-mail inválido</p>';
     }
     else if (!in_array($type, $tipos_validos)) {
         return '<p class="erro">Tipo invalido</p>';
     }else{
-        salvarOrcamento($type, $name, $number_limpo, $e, $desc);
+         $erroSalvar = salvarOrcamento($type, $name, $number_limpo, $e, $desc);
+         if ($erroSalvar != true) {
+             return '<p class="erro">Os dados não foram salvos</p>';
+         }
     }
-    return '<p class="sucesso">Orçamento enviado.</p>';
+    return '<p class="sucesso">Orçamento salvo com sucesso.</p>';
 }
 
 function salvarOrcamento($tp, $na, $nu, $e, $descri){
-    
+    try {
+        global $pdo;
+        $salvar = "INSERT INTO orcamento (tipo, nome, numero, email, descricao)
+        VALUES (:tipo, :nome, :numero, :email, :descricao);";
+        $stmt = $pdo->prepare($salvar);
+        $stmt->execute([
+            ":tipo" => $tp,
+            ":nome" => $na,
+            ":numero" => $nu,
+            ":email" => $e,
+            ":descricao" => $descri,
+        ]);
+        return true;
+    } catch (PDOException $erroBanco) {
+         return false;
+    }
 }
 ?>
 
