@@ -1,3 +1,52 @@
+<?php
+require_once "conexao.php";
+$mensagem = "<p>Preencha os dados abaixo e retornaremos em até 24 horas com seu orçamento.</p>";
+
+$tipo = "";
+$nome = "";
+$numero = "";
+$email = "";
+$descricao = "" ;
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $tipo = $_POST['tipo'];
+    $nome = $_POST['nome'];
+    $numero = $_POST['numero'];
+    $email = $_POST['email'];
+    $descricao = $_POST['descricao'];
+
+    $mensagem = validarForm($tipo, $nome, $numero, $email, $descricao);
+}
+function validarForm($type, $name, $number, $e, $desc){
+    $tipos_validos = ["criaSite", "limpaPc", "formataPc"];
+    $number_limpo = preg_replace('/[^0-9]/', '', $number);
+    
+    if (empty($type) ||empty($name) || empty($number) || empty($e) || empty($desc)) {
+        return '<p class="erro">Preencha todos os campos</p>';
+    }
+    
+    if (strlen($number_limpo) != 11) {
+        return '<p class="erro">Numero inválido</p>';
+    }
+    if (!filter_var($e, FILTER_VALIDATE_EMAIL)) {
+        return '<p class="erro">E-mail inválido</p>';
+    }
+    else if (!in_array($type, $tipos_validos)) {
+        return '<p class="erro">Tipo invalido</p>';
+    }else{
+        salvarOrcamento($type, $name, $number_limpo, $e, $desc);
+    }
+    return '<p class="sucesso">Orçamento enviado.</p>';
+}
+
+function salvarOrcamento($tp, $na, $nu, $e, $descri){
+    
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -34,7 +83,7 @@
 	<div class="container">
 	    <div class="card1">
 			<h1>Solicite seu orçamento</h1>
-			<p>Preencha os dados abaixo e retornaremos em até 24 horas com seu orçamento.</p>
+			<?php echo $mensagem;?>
 			<form action="orcamento.php" method="post">
 			<label for="tipo">Tipo de serviço</label>
 			    <select name="tipo" id="tipo">

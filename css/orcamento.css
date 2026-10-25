@@ -311,3 +311,21 @@ nav ul li a:hover {
         font-size: 22px;
     }
 }
+
+.erro {
+  background-color: #ffe0e0;
+  color: #c00;
+  border: 1px solid #c00;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.sucesso {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #28a745;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
