@@ -147,6 +147,9 @@ nav ul li a:hover {
     outline: none;
     transition: 0.2s; 
     background: #ffffff;
+    -webkit-appearance: none;
+    appearance: none;
+    color-scheme: light;
 }
 
 .card1 input:focus, 
@@ -236,9 +239,8 @@ nav ul li a:hover {
     margin-bottom: 5px;
 }
 
-/* CARD 3 MAIS FORTE QUE O CARD 2 */
 .card3 {
-    background: #bfdbfe; /* Azul um tom mais forte que o do card2 */
+    background: #bfdbfe;
     padding: 20px;
     border-radius: 12px;
     margin-top: 30px;
@@ -296,6 +298,11 @@ nav ul li a:hover {
 
     .card2 {
         margin-top: 0;
+        order: 1;
+    }
+
+    .card1 {
+        order: 2;
     }
 }
 
