@@ -8,8 +8,6 @@ $numero = "";
 $email = "";
 $descricao = "" ;
 
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo = $_POST['tipo'];
     $nome = $_POST['nome'];
@@ -18,6 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $descricao = $_POST['descricao'];
 
     $mensagem = validarForm($tipo, $nome, $numero, $email, $descricao);
+    if(str_contains($mensagem, 'sucesso')){
+            header("Location: orcamento.php?ok=1");
+            exit;
+        }
+}
+if(isset($_GET['ok'])){
+    $mensagem = '<p class="sucesso">Orçamento salvo com sucesso.</p>';
+    $tipo = $nome = $numero = $email = $descricao = "";
 }
 function validarForm($type, $name, $number, $e, $desc){
     $tipos_validos = ["criaSite", "limpaPc", "formataPc"];
