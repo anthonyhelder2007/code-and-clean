@@ -25,6 +25,7 @@ if(isset($_GET['ok'])){
     $mensagem = '<p class="sucesso">Orçamento salvo com sucesso.</p>';
     $tipo = $nome = $numero = $email = $descricao = "";
 }
+
 function validarForm($type, $name, $number, $e, $desc){
     $tipos_validos = ["criaSite", "limpaPc", "formataPc"];
     $number_limpo = preg_replace('/[^0-9]/', '', $number);
