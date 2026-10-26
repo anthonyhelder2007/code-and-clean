@@ -2,61 +2,57 @@
 require_once "conexao.php";
 $mensagem = "<p>Preencha os dados abaixo e retornaremos em até 24 horas com seu orçamento.</p>";
 
-$tipo = "";
-$nome = "";
-$numero = "";
-$email = "";
-$descricao = "" ;
+$tipo = $nome = $numero = $email = $descricao = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tipo = $_POST['tipo'];
-    $nome = $_POST['nome'];
-    $numero = $_POST['numero'];
-    $email = $_POST['email'];
-    $descricao = $_POST['descricao'];
+    $tipo = $_POST['tipo'] ?? '';
+    $nome = $_POST['nome'] ?? '';
+    $numero = $_POST['numero'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $descricao = $_POST['descricao'] ?? '';
+    $status = "em avaliacao"; // CORRIGIDO
 
-    $mensagem = validarForm($tipo, $nome, $numero, $email, $descricao);
+    $mensagem = validarForm($tipo, $nome, $numero, $email, $descricao, $status);
     if(str_contains($mensagem, 'sucesso')){
-            header("Location: orcamento.php?ok=1");
-            exit;
-        }
+        header("Location: orcamento.php?ok=1");
+        exit;
+    }
 }
 if(isset($_GET['ok'])){
     $mensagem = '<p class="sucesso">Orçamento salvo com sucesso.</p>';
     $tipo = $nome = $numero = $email = $descricao = "";
 }
 
-function validarForm($type, $name, $number, $e, $desc){
+function validarForm($type, $name, $number, $e, $desc, $st){
     $tipos_validos = ["criaSite", "limpaPc", "formataPc"];
     $number_limpo = preg_replace('/[^0-9]/', '', $number);
-    $erroSalvar = "";
     
-    if (empty($type) ||empty($name) || empty($number) || empty($e) || empty($desc)) {
+    if (empty($type) || empty($name) || empty($number) || empty($e) || empty($desc)) {
         return '<p class="erro">Preencha todos os campos</p>';
     }
-    
     if (strlen($number_limpo) != 11) {
         return '<p class="erro">Numero inválido</p>';
-     }
+    }
     if (!filter_var($e, FILTER_VALIDATE_EMAIL)) {
         return '<p class="erro">E-mail inválido</p>';
     }
-    else if (!in_array($type, $tipos_validos)) {
+    if (!in_array($type, $tipos_validos)) {
         return '<p class="erro">Tipo invalido</p>';
-    }else{
-         $erroSalvar = salvarOrcamento($type, $name, $number_limpo, $e, $desc);
-         if ($erroSalvar != true) {
-             return '<p class="erro">Os dados não foram salvos</p>';
-         }
+    }
+
+    $erroSalvar = salvarOrcamento($type, $name, $number_limpo, $e, $desc, $st);
+    if ($erroSalvar != true) {
+        return '<p class="erro">Os dados não foram salvos</p>';
     }
     return '<p class="sucesso">Orçamento salvo com sucesso.</p>';
 }
 
-function salvarOrcamento($tp, $na, $nu, $e, $descri){
+function salvarOrcamento($tp, $na, $nu, $e, $descri, $st){
     try {
         global $pdo;
-        $salvar = "INSERT INTO orcamento (tipo, nome, numero, email, descricao)
-        VALUES (:tipo, :nome, :numero, :email, :descricao);";
+        // CORRIGIDO: adicionei a coluna status
+        $salvar = "INSERT INTO orcamento (tipo, nome, numero, email, descricao, status)
+        VALUES (:tipo, :nome, :numero, :email, :descricao, :status);";
         $stmt = $pdo->prepare($salvar);
         $stmt->execute([
             ":tipo" => $tp,
@@ -64,6 +60,7 @@ function salvarOrcamento($tp, $na, $nu, $e, $descri){
             ":numero" => $nu,
             ":email" => $e,
             ":descricao" => $descri,
+            ":status" => $st
         ]);
         return true;
     } catch (PDOException $erroBanco) {
@@ -71,8 +68,6 @@ function salvarOrcamento($tp, $na, $nu, $e, $descri){
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
