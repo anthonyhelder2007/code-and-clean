@@ -54,8 +54,17 @@ foreach($dadosD as $orc){
     <header>
 	<div class="header1">
 	    <div class="logo"><img src="../img/logo.jpeg" alt="logo"></div>
-		<h1>Anthony <br> Code and Clean</h1>
+		<h1>Anthony <br>
+		Code and Clean
+		</h1>
 	</div>
+	<nav>
+	    <ul>
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../servicos.html">Serviços</a></li>
+			<li><a href="../sobre.html">Sobre</a></li>
+		</ul>
+	</nav>
 	</header>
 
 <h2>Em Avaliação</h2>

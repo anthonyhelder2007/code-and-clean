@@ -11,35 +11,68 @@ body {
     padding: 20px;
 }
 
-.header1 {
-    background: #0f172a;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px 25px;
-    border-radius: 10px;
-    margin-bottom: 25px;
+/* HEADER - MESMAS CORES */
+header{
+    background:#0f172a;
+    border-radius:10px;
+    margin-bottom:20px;
+    padding:12px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
 }
-.header1 .logo img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #38bdf8;
+.header1{
+    background:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    box-shadow:none;
+    border-radius:0;
 }
-.header1 h1 {
-    font-size: 18px;
-    line-height: 1.2;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.header1 .logo img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #38bdf8;
 }
+.header1 h1{
+    font-size:13px;
+    color:#fff;
+    line-height:1.1;
+    text-transform:uppercase;
+}
+header nav{
+    width:auto;
+}
+header nav ul{
+    list-style:none;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+header nav ul li a{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+    background:#1e293b;
+    padding:7px 12px;
+    border-radius:6px;
+    display:block;
+}
+header nav ul li a:hover{color:#38bdf8}
 
 h2 {
-    margin: 30px 0 10px;
+    margin: 24px 0 10px;
     color: #0f172a;
     border-left: 4px solid #38bdf8;
     padding-left: 10px;
+    font-size:16px;
 }
 
 table {
@@ -47,9 +80,9 @@ table {
     background: #fff;
     border-collapse: collapse;
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     margin-bottom: 20px;
+    overflow: hidden;
 }
 
 thead {
@@ -58,10 +91,11 @@ thead {
 }
 
 th, td {
-    padding: 12px 14px;
+    padding: 12px 10px;
     text-align: left;
-    font-size: 14px;
+    font-size: 13px;
     border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
 }
 
 tbody tr:hover {
@@ -84,31 +118,45 @@ select {
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn1:hover {
-    background: #0ea5e9;
-    color: #fff;
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 8px;
+    body{padding:8px}
+    
+    header{
+        padding:10px;
     }
-    table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
+    header nav{
+        width:100%;
+        border-top:1px solid #1e293b;
+        padding-top:8px;
+        margin-top:2px;
     }
-    thead, tbody {
-        display: table;
-        width: 100%;
-        min-width: 600px;
+    header nav ul{
+        justify-content:space-between;
     }
-    th, td {
-        font-size: 12px;
-        padding: 10px 8px;
+    header nav ul li{flex:1}
+    header nav ul li a{
+        text-align:center;
+        font-size:11px;
+    }
+
+    /* TABELA 100% RESPONSIVA */
+    table{
+        display:block;
+        width:100%;
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+    }
+    table::-webkit-scrollbar{
+        height:6px;
+    }
+    table::-webkit-scrollbar-thumb{
+        background:#38bdf8;
+        border-radius:10px;
+    }
+    th, td{
+        font-size:12px;
+        padding:10px 8px;
     }
 }
