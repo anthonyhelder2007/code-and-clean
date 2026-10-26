@@ -1,6 +1,6 @@
 <?php
-require_once "conexao.php";
 session_start();
+require_once "conexao.php";
 
 $mensagem = "";
 
@@ -27,9 +27,10 @@ function validarLogin($e, $s){
     $stmt->execute(['email' => $e]);
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // CORREÇÃO AQUI - era password_verify
     if ($usuario && $s === $usuario['senha']) {
-        header("Location: adm.php");
+        $_SESSION['id_adm'] = $usuario['id_adm'];
+        $_SESSION['logado'] = true;
+        header("Location: admin.php");
         exit;
     } else {
         return "E-mail ou senha incorretos";
